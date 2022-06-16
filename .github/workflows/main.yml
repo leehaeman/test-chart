@@ -18,6 +18,6 @@ jobs:
       - name: Install Helm Push Plugin
         run: helm plugin install https://github.com/chartmuseum/helm-push.git
       - name: Helm repo add
-        run: helm repo add --username=admin --password=Harbor12345 myrepo https://harbor.fulfillment-dev.click/chartrepo/fulfillment
+        run: helm repo add --username=${{ secrets.HARBOR_USERNAME }} --password=${{ secrets.HARBOR_PASSWORD }} myrepo https://harbor.fulfillment-dev.click/chartrepo/fulfillment
       - name: Push
         run: helm cm-push . myrepo
