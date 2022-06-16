@@ -12,4 +12,4 @@ sources:
 - https://github.com/matheusfm/httpbin-chart
 - https://github.com/mccutchen/go-httpbin
 type: application
-version: 0.1.1
+version: 0.1.2
