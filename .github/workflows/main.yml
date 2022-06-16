@@ -1,0 +1,23 @@
+name: Helm Chart CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codes
+        uses: actions/checkout@v2
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+      - name: Lint
+        run: helm lint .
+      - name: Package
+        run: helm package .
+      - name: Install Helm Push Plugin
+        run: helm plugin install https://github.com/chartmuseum/helm-push.git
+      - name: Helm repo add
+        run: helm repo add --username=admin --password=Harbor12345 myrepo https://harbor.fulfillment-dev.click/chartrepo/fulfillment
+      - name: Push
+        run: helm cm-push . myrepo
